@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/lib/com.example.jaisonjoseph.newsclient"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:scaleType="fitXY"
+        android:src="@drawable/main_back" />
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical"-->
+        <!--android:id="@+id/linearLayout">-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="55dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/fn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/file_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="File name:"
+                    android:textSize="@dimen/titr_text_size"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/set_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/subtitr_text_size" />
+            </LinearLayout>
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/fc"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/file_comment"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="File comment:"-->
+                    <!--android:textSize="@dimen/titr_text_size"-->
+                    <!--android:textStyle="bold" />-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/set_comment"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:ems="10"-->
+                    <!--android:inputType="textPersonName"-->
+                    <!--android:text="@string/file_comment_edittext_note"-->
+                    <!--android:textSize="@dimen/subtitr_text_size" />-->
+            <!--</LinearLayout>-->
+
+            <LinearLayout
+                android:id="@+id/fqs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/samplerate_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sample rate"
+                    android:textSize="@dimen/titr_text_size"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/fqs_radiogroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/veryLowQFile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="8000"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/lowQFile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="22050"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/normalQFile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="44100"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/HighQFile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="48000"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                </RadioGroup>
+
+                <!--</LinearLayout>-->
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fast_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chanels"
+                    android:textSize="@dimen/titr_text_size"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/fch_radiogroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/mono"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Mono (1 Chanel)"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/stereo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Stereo (2 chanels)"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/fbd"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/fbdept"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Bit Depth"-->
+                    <!--android:textSize="@dimen/titr_text_size"-->
+                    <!--android:textStyle="bold" />-->
+
+                <!--<RadioGroup-->
+                    <!--android:id="@+id/fbd_rg"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/fbd8bit"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:text="8 Bit"-->
+                        <!--android:textSize="@dimen/subtitr_text_size" />-->
+
+                    <!--<RadioButton-->
+                        <!--android:id="@+id/fbd16bit"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:text="16 Bit"-->
+                        <!--android:textSize="@dimen/subtitr_text_size" />-->
+
+                <!--</RadioGroup>-->
+
+
+            <!--</LinearLayout>-->
+
+            <LinearLayout
+                android:id="@+id/fcodB"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Mp3Btr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mp3 Bitrate"
+                    android:textSize="@dimen/titr_text_size"
+                    android:textStyle="bold" />
+
+
+                <RadioGroup
+                    android:id="@+id/fcodB_rg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/mp3B32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="32"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/mp3B64"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="64"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/Mp3B128"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="128"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/mp3B256"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="256"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fcodQ"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Mp3Q"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Coding Quality"
+                    android:textSize="@dimen/titr_text_size"
+                    android:textStyle="bold" />
+
+
+                <RadioGroup
+                    android:id="@+id/fcodQ_rg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/mp3Qlow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Low (Fast)"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/mp3Qnormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Normal"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/Mp3Qhigh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="High"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                    <RadioButton
+                        android:id="@+id/mp3Qbest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Best (Slow)"
+                        android:textSize="@dimen/subtitr_text_size" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!--</LinearLayout>-->
+
+
+
+</RelativeLayout>

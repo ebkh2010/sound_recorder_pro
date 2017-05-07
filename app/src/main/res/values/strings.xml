@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name">Sound Recorder Pro</string>
+    <string name="file_name_edittext_note">Audio</string>
+    <string name="file_comment_edittext_note">Recorded by radio maaref.</string>
+</resources>
