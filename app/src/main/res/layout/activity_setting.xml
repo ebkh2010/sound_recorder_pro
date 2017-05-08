@@ -15,7 +15,7 @@
         android:adjustViewBounds="false"
         android:cropToPadding="false"
         android:scaleType="fitXY"
-        android:src="@drawable/main_back" />
+        android:src="@drawable/recordermastersetting" />
 
     <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
@@ -25,10 +25,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="55dp">
+        android:layout_marginTop="25dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,28 +61,28 @@
             </LinearLayout>
 
             <!--<LinearLayout-->
-                <!--android:id="@+id/fc"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginBottom="20dp"-->
-                <!--android:orientation="vertical">-->
+            <!--android:id="@+id/fc"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="20dp"-->
+            <!--android:orientation="vertical">-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/file_comment"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="File comment:"-->
-                    <!--android:textSize="@dimen/titr_text_size"-->
-                    <!--android:textStyle="bold" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/file_comment"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="File comment:"-->
+            <!--android:textSize="@dimen/titr_text_size"-->
+            <!--android:textStyle="bold" />-->
 
-                <!--<EditText-->
-                    <!--android:id="@+id/set_comment"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:ems="10"-->
-                    <!--android:inputType="textPersonName"-->
-                    <!--android:text="@string/file_comment_edittext_note"-->
-                    <!--android:textSize="@dimen/subtitr_text_size" />-->
+            <!--<EditText-->
+            <!--android:id="@+id/set_comment"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:ems="10"-->
+            <!--android:inputType="textPersonName"-->
+            <!--android:text="@string/file_comment_edittext_note"-->
+            <!--android:textSize="@dimen/subtitr_text_size" />-->
             <!--</LinearLayout>-->
 
             <LinearLayout
@@ -186,43 +186,43 @@
             </LinearLayout>
 
             <!--<LinearLayout-->
-                <!--android:id="@+id/fbd"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_marginBottom="20dp"-->
-                <!--android:orientation="vertical">-->
+            <!--android:id="@+id/fbd"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginBottom="20dp"-->
+            <!--android:orientation="vertical">-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/fbdept"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Bit Depth"-->
-                    <!--android:textSize="@dimen/titr_text_size"-->
-                    <!--android:textStyle="bold" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/fbdept"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Bit Depth"-->
+            <!--android:textSize="@dimen/titr_text_size"-->
+            <!--android:textStyle="bold" />-->
 
-                <!--<RadioGroup-->
-                    <!--android:id="@+id/fbd_rg"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:orientation="horizontal">-->
+            <!--<RadioGroup-->
+            <!--android:id="@+id/fbd_rg"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="horizontal">-->
 
-                    <!--<RadioButton-->
-                        <!--android:id="@+id/fbd8bit"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:text="8 Bit"-->
-                        <!--android:textSize="@dimen/subtitr_text_size" />-->
+            <!--<RadioButton-->
+            <!--android:id="@+id/fbd8bit"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="8 Bit"-->
+            <!--android:textSize="@dimen/subtitr_text_size" />-->
 
-                    <!--<RadioButton-->
-                        <!--android:id="@+id/fbd16bit"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:text="16 Bit"-->
-                        <!--android:textSize="@dimen/subtitr_text_size" />-->
+            <!--<RadioButton-->
+            <!--android:id="@+id/fbd16bit"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="16 Bit"-->
+            <!--android:textSize="@dimen/subtitr_text_size" />-->
 
-                <!--</RadioGroup>-->
+            <!--</RadioGroup>-->
 
 
             <!--</LinearLayout>-->

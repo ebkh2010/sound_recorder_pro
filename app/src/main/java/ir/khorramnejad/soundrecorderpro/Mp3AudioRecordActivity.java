@@ -120,10 +120,10 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
                     timerPuse=false;
                     hur=0;min=0;sec=0;dsec=0;
                     startTimer(timer);
-                    btnRec.setImageResource(ir.khorramnejad.soundrecorderpro.R.drawable.record_stop);
+                    btnRec.setImageResource(R.drawable.icn_stop1);
                     btnRecId=1;
                     btnSetting.setEnabled(false);
-                    btnSetting.setImageResource(ir.khorramnejad.soundrecorderpro.R.drawable.setting_disable);
+                    btnSetting.setImageResource(R.drawable.icn_setting_dis);
 
                 }
                 else
@@ -132,10 +132,10 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
                     timerPuse = true;
                     timer.cancel();
                     isRecording = false;
-                    btnRec.setImageResource(ir.khorramnejad.soundrecorderpro.R.drawable.record);
+                    btnRec.setImageResource(R.drawable.icn_rec);
                     btnRecId=0;
                     btnSetting.setEnabled(true);
-                    btnSetting.setImageResource(ir.khorramnejad.soundrecorderpro.R.drawable.setting);
+                    btnSetting.setImageResource(R.drawable.icn_setting);
                 }
             }
         });
@@ -254,7 +254,7 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
         timerPuse = true;
         if (isRecording) timer.cancel();
         isRecording = false;
-        btnRec.setImageResource(ir.khorramnejad.soundrecorderpro.R.drawable.record);
+        btnRec.setImageResource(R.drawable.icn_rec);
         btnRecId=0;
     }
 
@@ -288,10 +288,10 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
                             dsec=0;
                             sec++;
                             if (btnRecId==0){
-                                btnRec.setImageResource(ir.khorramnejad.soundrecorderpro.R.drawable.record_stop);
+                                btnRec.setImageResource(R.drawable.icn_stop1);
                                 btnRecId=1;
                             } else {
-                                btnRec.setImageResource(ir.khorramnejad.soundrecorderpro.R.drawable.record_stop_disable);
+                                btnRec.setImageResource(R.drawable.icn_stop2);
                                 btnRecId=0;
                             }
                         }
