@@ -28,7 +28,7 @@ public class WaveformView extends View {
     public static final int MODE_PLAYBACK = 2;
     public static final int buferchanger = 2*5;
 
-    private static final int HISTORY_SIZE = 20;
+    private static final int HISTORY_SIZE = 10;
 
     private TextPaint mTextPaint;
     private Paint mStrokePaint, mFillPaint, mMarkerPaint;
