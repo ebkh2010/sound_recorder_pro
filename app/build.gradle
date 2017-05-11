@@ -24,7 +24,8 @@ model {
 
 repositories {
     flatDir {
-        dirs '../androidlame/build/outputs/aar'
+        dirs '../androidlame/build/outputs/aar',
+                '../awaveform/build/outputs/aar'
     }
 }
 
@@ -32,6 +33,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
-    compile project(':androidlame')
 
+    testCompile 'junit:junit:4.12'
+    compile "commons-io:commons-io:+"
+    compile 'com.android.support:design:23.1.1'
+    compile project(':androidlame')
+    compile project(':waveform')
 }

@@ -15,28 +15,26 @@
 package ir.khorramnejad.soundrecorderpro;
 
 import android.content.Intent;
-import android.media.AudioFormat;
+import android.content.pm.PackageManager;
 import android.media.AudioRecord;
-import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.newventuresoftware.waveform.WaveformView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import ir.khorramnejad.androidlame.AndroidLame;
-import ir.khorramnejad.androidlame.LameBuilder;
-
-import static ir.khorramnejad.androidlame.LameBuilder.VbrMode.VBR_OFF;
 
 
 public class Mp3AudioRecordActivity extends AppCompatActivity {
@@ -64,6 +62,9 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
     TextView statusText, dis_hr , dis_min ,dis_sec , dis_dsec ;
     TextView File_name,Samplerate,Chanels,BitDepth,
             Mp3_Bitrate,Codec_Quality,LPF,HPF,Comment;
+    private WaveformView mRealtimeWaveformView;
+    private RecordingThread mRecordingThread;
+    private static final int REQUEST_RECORD_AUDIO = 13;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,6 +92,14 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
 //        Comment         = (TextView) findViewById(R.id.comment);
 //        BitDepth        = (TextView) findViewById(R.id.bitDepth);
 
+        mRealtimeWaveformView = (WaveformView) findViewById(R.id.waveformView);
+        mRecordingThread = new RecordingThread(new AudioDataReceivedListener() {
+            @Override
+            public void onAudioDataReceived(short[] data) {
+                mRealtimeWaveformView.setSamples(data);
+            }
+        });
+
         fileNameCreat();
         updateNote();
 
@@ -113,7 +122,7 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             isRecording = true;
-                            startRecording();
+                            startAudioRecordingSafe();
                         }
                     }.start();
                     timer= new Timer();
@@ -128,12 +137,7 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
                 }
                 else
                 {
-
-                    timerPuse = true;
-                    timer.cancel();
-                    isRecording = false;
-                    btnRec.setImageResource(R.drawable.icn_rec);
-                    btnRecId=0;
+                    stopRecording();
                     btnSetting.setEnabled(true);
                     btnSetting.setImageResource(R.drawable.icn_setting);
                 }
@@ -151,103 +155,103 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
         });
 
     }
-
-    private void startRecording() {
-
-//        fileNameCreat();
-        G.minBuffer = AudioRecord.getMinBufferSize(G.inSamplerate, AudioFormat.CHANNEL_IN_MONO,
-                AudioFormat.ENCODING_PCM_16BIT);
-
-
-            audioRecord = new AudioRecord(
-                    MediaRecorder.AudioSource.MIC,
-                    G.inSamplerate,
-                    AudioFormat.CHANNEL_IN_MONO,
-                    AudioFormat.ENCODING_PCM_16BIT,
-                    G.minBuffer * 2);
-
-
-
-        //5 seconds data
-        short[] buffer = new short[G.inSamplerate * 2 * 5];
-
-        // 'mp3buf' should be at least 7200 bytes long
-        // to hold all possible emitted data.
-        byte[] mp3buffer = new byte[(int) (7200 + buffer.length * 2 * 1.25)];
-
-        try {
-            outputStream = new FileOutputStream(new File(G.filePath));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        androidLame = new LameBuilder()
-                .setVbrMode(VBR_OFF)
-                .setInSampleRate(G.inSamplerate)
-                .setOutChannels(G.inChanels)
-                .setOutBitrate(G.inMp3Bitrate)
-                .setOutSampleRate(G.inSamplerate)
-                .setId3tagComment(G.inComment)
-                .setId3tagAlbum(G.inAlbum)
-                .setId3tagTitle(G.inTitle)
-                .setId3tagArtist(G.inArtist)
-                .setQuality(G.inQuality)
-//                .setLowpassFreqency(inLowFrq)
-//                .setHighpassFreqency(inHighFrq)
-                .build();
-
-//        updateStatus("Recording...");
-        if (audioRecord.getState()== AudioRecord.STATE_INITIALIZED)
-        audioRecord.startRecording();
-        else
-            Toast.makeText(this, "Please check the settings!",
-                    Toast.LENGTH_SHORT).show();
-
-        int bytesRead = 0;
-
-        while (isRecording) {
-
-            bytesRead = audioRecord.read(buffer, 0, G.minBuffer);
-            if (bytesRead > 0) {
-
-                int bytesEncoded = androidLame.encode(buffer, buffer, bytesRead, mp3buffer);
-                if (bytesEncoded > 0) {
-                    try {
-                        outputStream.write(mp3buffer, 0, bytesEncoded);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-
-//        updateStatus("Recording stopped");
-
-//        addLog("flushing final mp3buffer");
-        int outputMp3buf = androidLame.flush(mp3buffer);
-//        addLog("flushed " + outputMp3buf + " bytes");
-
-        if (outputMp3buf > 0) {
-            try {
-//                addLog("writing final mp3buffer to outputstream");
-                outputStream.write(mp3buffer, 0, outputMp3buf);
-//                addLog("closing output stream");
-                outputStream.close();
-//                updateStatus("Output recording saved in " + filePath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-//        addLog("releasing audio recorder");
-        audioRecord.stop();
-        audioRecord.release();
-
-//        addLog("closing android lame");
-        androidLame.close();
-
-        isRecording = false;
-    }
+//
+//    private void startRecording() {
+//
+////        fileNameCreat();
+//        G.minBuffer = AudioRecord.getMinBufferSize(G.inSamplerate, AudioFormat.CHANNEL_IN_MONO,
+//                AudioFormat.ENCODING_PCM_16BIT);
+//
+//
+//            audioRecord = new AudioRecord(
+//                    MediaRecorder.AudioSource.MIC,
+//                    G.inSamplerate,
+//                    AudioFormat.CHANNEL_IN_MONO,
+//                    AudioFormat.ENCODING_PCM_16BIT,
+//                    G.minBuffer * 2);
+//
+//
+//
+//        //5 seconds data
+//        short[] buffer = new short[G.inSamplerate * 2 * 5];
+//
+//        // 'mp3buf' should be at least 7200 bytes long
+//        // to hold all possible emitted data.
+//        byte[] mp3buffer = new byte[(int) (7200 + buffer.length * 2 * 1.25)];
+//
+//        try {
+//            outputStream = new FileOutputStream(new File(G.filePath));
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        androidLame = new LameBuilder()
+//                .setVbrMode(VBR_OFF)
+//                .setInSampleRate(G.inSamplerate)
+//                .setOutChannels(G.inChanels)
+//                .setOutBitrate(G.inMp3Bitrate)
+//                .setOutSampleRate(G.inSamplerate)
+//                .setId3tagComment(G.inComment)
+//                .setId3tagAlbum(G.inAlbum)
+//                .setId3tagTitle(G.inTitle)
+//                .setId3tagArtist(G.inArtist)
+//                .setQuality(G.inQuality)
+////                .setLowpassFreqency(inLowFrq)
+////                .setHighpassFreqency(inHighFrq)
+//                .build();
+//
+////        updateStatus("Recording...");
+//        if (audioRecord.getState()== AudioRecord.STATE_INITIALIZED)
+//        audioRecord.startRecording();
+//        else
+//            Toast.makeText(this, "Please check the settings!",
+//                    Toast.LENGTH_SHORT).show();
+//
+//        int bytesRead = 0;
+//
+//        while (isRecording) {
+//
+//            bytesRead = audioRecord.read(buffer, 0, G.minBuffer);
+//            if (bytesRead > 0) {
+//
+//                int bytesEncoded = androidLame.encode(buffer, buffer, bytesRead, mp3buffer);
+//                if (bytesEncoded > 0) {
+//                    try {
+//                        outputStream.write(mp3buffer, 0, bytesEncoded);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }
+//
+////        updateStatus("Recording stopped");
+//
+////        addLog("flushing final mp3buffer");
+//        int outputMp3buf = androidLame.flush(mp3buffer);
+////        addLog("flushed " + outputMp3buf + " bytes");
+//
+//        if (outputMp3buf > 0) {
+//            try {
+////                addLog("writing final mp3buffer to outputstream");
+//                outputStream.write(mp3buffer, 0, outputMp3buf);
+////                addLog("closing output stream");
+//                outputStream.close();
+////                updateStatus("Output recording saved in " + filePath);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+////        addLog("releasing audio recorder");
+//        audioRecord.stop();
+//        audioRecord.release();
+//
+////        addLog("closing android lame");
+//        androidLame.close();
+//
+//        isRecording = false;
+//    }
 
     private void stopRecording()
     {
@@ -256,6 +260,7 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
         isRecording = false;
         btnRec.setImageResource(R.drawable.icn_rec);
         btnRecId=0;
+        mRecordingThread.stopRecording();
     }
 
     //
@@ -321,7 +326,7 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
 
     public void  updateNote()
     {
-        File_name.setText(name +".mp3");
+        File_name.setText("../SoundRecorderPro/"+name +".mp3");
 //        Samplerate.setText("Sample Rate: "+String.valueOf(inSamplerate));
 //        Mp3_Bitrate.setText("MP3 CBR Bitrate: " + String.valueOf(inMp3Bitrate));
 //        BitDepth.setText("Bit Depth: "+ String.valueOf(inBitDept)+" Bit");
@@ -358,6 +363,32 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
             G.filePath = G.REC_DIR + "/" + name + ".mp3";
     }
 
+    private void startAudioRecordingSafe() {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.RECORD_AUDIO)
+                == PackageManager.PERMISSION_GRANTED)
+        {
+            mRecordingThread.startRecording();
+        } else {
+            requestMicrophonePermission();
+        }
+    }
+
+    private void requestMicrophonePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.RECORD_AUDIO)) {
+            // Show dialog explaining why we need record audio
+            Snackbar.make(mRealtimeWaveformView, "Microphone access is required in order to record audio",
+                    Snackbar.LENGTH_INDEFINITE).setAction("OK", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ActivityCompat.requestPermissions(Mp3AudioRecordActivity.this, new String[]{
+                            android.Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO);
+                }
+            }).show();
+        } else {
+            ActivityCompat.requestPermissions(Mp3AudioRecordActivity.this, new String[]{
+                    android.Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO);
+        }
+    }
 
 
     public void onStop(){

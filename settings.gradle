@@ -1,1 +1,1 @@
-include ':app', ':androidlame'
+include ':app', ':androidlame', ':waveform'
