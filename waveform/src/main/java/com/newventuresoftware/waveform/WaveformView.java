@@ -5,17 +5,14 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Picture;
 import android.graphics.Rect;
-import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.newventuresoftware.waveform.utils.AudioUtils;
-import com.newventuresoftware.waveform.utils.SamplingUtils;
 import com.newventuresoftware.waveform.utils.TextUtils;
 
 import java.util.LinkedList;
@@ -27,6 +24,8 @@ public class WaveformView extends View {
     public static final int MODE_RECORDING = 1;
     public static final int MODE_PLAYBACK = 2;
     public static final int buferchanger = 2*5;
+    public static int xScale=1;
+    public static int yScale=2;
 
     private static final int HISTORY_SIZE = 10;
 
@@ -110,8 +109,8 @@ public class WaveformView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        width = getMeasuredWidth()*buferchanger;
-        height = getMeasuredHeight();
+        width = getMeasuredWidth()*buferchanger*xScale;
+        height = getMeasuredHeight()*yScale;
         xStep = width / (mAudioLength * 1.0f);
         centerY = height / 2f;
         drawRect = new Rect(0, 0, width, height);
@@ -119,9 +118,9 @@ public class WaveformView extends View {
         if (mHistoricalData != null) {
             mHistoricalData.clear();
         }
-        if (mMode == MODE_PLAYBACK) {
-            createPlaybackWaveform();
-        }
+//        if (mMode == MODE_PLAYBACK) {
+//            createPlaybackWaveform();
+//        }
     }
 
     @Override
@@ -136,73 +135,74 @@ public class WaveformView extends View {
                 canvas.drawLines(p, mStrokePaint);
                 brightness += colorDelta;
             }
-        } else if (mMode == MODE_PLAYBACK) {
-            if (mCachedWaveform != null) {
-                canvas.drawPicture(mCachedWaveform);
-            } else if (mCachedWaveformBitmap != null) {
-                canvas.drawBitmap(mCachedWaveformBitmap, null, drawRect, null);
-            }
-            if (mMarkerPosition > -1 && mMarkerPosition < mAudioLength)
-                canvas.drawLine(xStep * mMarkerPosition, 0, xStep * mMarkerPosition, height, mMarkerPaint);
         }
+//        else if (mMode == MODE_PLAYBACK) {
+//            if (mCachedWaveform != null) {
+//                canvas.drawPicture(mCachedWaveform);
+//            } else if (mCachedWaveformBitmap != null) {
+//                canvas.drawBitmap(mCachedWaveformBitmap, null, drawRect, null);
+//            }
+//            if (mMarkerPosition > -1 && mMarkerPosition < mAudioLength)
+//                canvas.drawLine(xStep * mMarkerPosition, 0, xStep * mMarkerPosition, height, mMarkerPaint);
+//        }
     }
 
-    public int getMode() {
-        return mMode;
-    }
-
-    public void setMode(int mMode) {
-        mMode = mMode;
-    }
-
-    public short[] getSamples() {
-        return mSamples;
-    }
+//    public int getMode() {
+//        return mMode;
+//    }
+//
+//    public void setMode(int mMode) {
+//        mMode = mMode;
+//    }
+//
+//    public short[] getSamples() {
+//        return mSamples;
+//    }
 
     public void setSamples(short[] samples) {
         mSamples = samples;
         calculateAudioLength();
         onSamplesChanged();
     }
-
-    public int getMarkerPosition() {
-        return mMarkerPosition;
-    }
-
-    public void setMarkerPosition(int markerPosition) {
-        mMarkerPosition = markerPosition;
-        postInvalidate();
-    }
-
-    public int getAudioLength() {
-        return mAudioLength;
-    }
-
-    public int getSampleRate() {
-        return mSampleRate;
-    }
-
-    public void setSampleRate(int sampleRate) {
-        mSampleRate = sampleRate;
-        calculateAudioLength();
-    }
-
-    public int getChannels() {
-        return mChannels;
-    }
-
-    public void setChannels(int channels) {
-        mChannels = channels;
-        calculateAudioLength();
-    }
-
-    public boolean showTextAxis() {
-         return showTextAxis;
-    }
-
-    public void setShowTextAxis(boolean showTextAxis) {
-        this.showTextAxis = showTextAxis;
-    }
+//
+//    public int getMarkerPosition() {
+//        return mMarkerPosition;
+//    }
+//
+//    public void setMarkerPosition(int markerPosition) {
+//        mMarkerPosition = markerPosition;
+//        postInvalidate();
+//    }
+//
+//    public int getAudioLength() {
+//        return mAudioLength;
+//    }
+//
+//    public int getSampleRate() {
+//        return mSampleRate;
+//    }
+//
+//    public void setSampleRate(int sampleRate) {
+//        mSampleRate = sampleRate;
+//        calculateAudioLength();
+//    }
+//
+//    public int getChannels() {
+//        return mChannels;
+//    }
+//
+//    public void setChannels(int channels) {
+//        mChannels = channels;
+//        calculateAudioLength();
+//    }
+//
+//    public boolean showTextAxis() {
+//         return showTextAxis;
+//    }
+//
+//    public void setShowTextAxis(boolean showTextAxis) {
+//        this.showTextAxis = showTextAxis;
+//    }
 
     private void calculateAudioLength() {
         if (mSamples == null || mSampleRate == 0 || mChannels == 0)
@@ -229,11 +229,12 @@ public class WaveformView extends View {
             temp.addLast(waveformPoints);
             mHistoricalData = temp;
             postInvalidate();
-        } else if (mMode == MODE_PLAYBACK) {
-            mMarkerPosition = -1;
-            xStep = width / (mAudioLength * 1.0f);
-            createPlaybackWaveform();
         }
+//        else if (mMode == MODE_PLAYBACK) {
+//            mMarkerPosition = -1;
+//            xStep = width / (mAudioLength * 1.0f);
+//            createPlaybackWaveform();
+//        }
     }
 
     void drawRecordingWaveform(short[] buffer, float[] waveformPoints) {
@@ -260,68 +261,68 @@ public class WaveformView extends View {
             lastY = y;
         }
     }
+//
+//    Path drawPlaybackWaveform(int width, int height, short[] buffer) {
+//        Path waveformPath = new Path();
+//        float centerY = height / 2f;
+//        float max = Short.MAX_VALUE;
+//
+//        short[][] extremes = SamplingUtils.getExtremes(buffer, width);
+//
+//
+//        waveformPath.moveTo(0, centerY);
+//
+//        // draw maximums
+//        for (int x = 0; x < width; x++) {
+//            short sample = extremes[x][0];
+//            float y = centerY - ((sample / max) * centerY);
+//            waveformPath.lineTo(x, y);
+//        }
+//
+//        // draw minimums
+//        for (int x = width - 1; x >= 0; x--) {
+//            short sample = extremes[x][1];
+//            float y = centerY - ((sample / max) * centerY);
+//            waveformPath.lineTo(x, y);
+//        }
+//
+//        waveformPath.close();
+//
+//        return waveformPath;
+//    }
+//
+//    private void createPlaybackWaveform() {
+//        if (width <= 0 || height <= 0 || mSamples == null)
+//            return;
+//
+//        Canvas cacheCanvas;
+//        if (Build.VERSION.SDK_INT >= 23 && isHardwareAccelerated()) {
+//            mCachedWaveform = new Picture();
+//            cacheCanvas = mCachedWaveform.beginRecording(width, height);
+//        } else {
+//            mCachedWaveformBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+//            cacheCanvas = new Canvas(mCachedWaveformBitmap);
+//        }
+//
+//        Path mWaveform = drawPlaybackWaveform(width, height, mSamples);
+//        cacheCanvas.drawPath(mWaveform, mFillPaint);
+//        cacheCanvas.drawPath(mWaveform, mStrokePaint);
+//        drawAxis(cacheCanvas, width);
+//
+//        if (mCachedWaveform != null)
+//            mCachedWaveform.endRecording();
+//    }
 
-    Path drawPlaybackWaveform(int width, int height, short[] buffer) {
-        Path waveformPath = new Path();
-        float centerY = height / 2f;
-        float max = Short.MAX_VALUE;
-
-        short[][] extremes = SamplingUtils.getExtremes(buffer, width);
-
-
-        waveformPath.moveTo(0, centerY);
-
-        // draw maximums
-        for (int x = 0; x < width; x++) {
-            short sample = extremes[x][0];
-            float y = centerY - ((sample / max) * centerY);
-            waveformPath.lineTo(x, y);
-        }
-
-        // draw minimums
-        for (int x = width - 1; x >= 0; x--) {
-            short sample = extremes[x][1];
-            float y = centerY - ((sample / max) * centerY);
-            waveformPath.lineTo(x, y);
-        }
-
-        waveformPath.close();
-
-        return waveformPath;
-    }
-
-    private void createPlaybackWaveform() {
-        if (width <= 0 || height <= 0 || mSamples == null)
-            return;
-
-        Canvas cacheCanvas;
-        if (Build.VERSION.SDK_INT >= 23 && isHardwareAccelerated()) {
-            mCachedWaveform = new Picture();
-            cacheCanvas = mCachedWaveform.beginRecording(width, height);
-        } else {
-            mCachedWaveformBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            cacheCanvas = new Canvas(mCachedWaveformBitmap);
-        }
-
-        Path mWaveform = drawPlaybackWaveform(width, height, mSamples);
-        cacheCanvas.drawPath(mWaveform, mFillPaint);
-        cacheCanvas.drawPath(mWaveform, mStrokePaint);
-        drawAxis(cacheCanvas, width);
-
-        if (mCachedWaveform != null)
-            mCachedWaveform.endRecording();
-    }
-
-    private void drawAxis(Canvas canvas, int width) {
-        if (!showTextAxis) return;
-        int seconds = mAudioLength / 1000;
-        float xStep = width / (mAudioLength / 1000f);
-        float textHeight = mTextPaint.getTextSize();
-        float textWidth = mTextPaint.measureText("10.00");
-        int secondStep = (int)(textWidth * seconds * 2) / width;
-        secondStep = Math.max(secondStep, 1);
-        for (float i = 0; i <= seconds; i += secondStep) {
-            canvas.drawText(String.format("%.2f", i), i * xStep, textHeight, mTextPaint);
-        }
-    }
+//    private void drawAxis(Canvas canvas, int width) {
+//        if (!showTextAxis) return;
+//        int seconds = mAudioLength / 1000;
+//        float xStep = width / (mAudioLength / 1000f);
+//        float textHeight = mTextPaint.getTextSize();
+//        float textWidth = mTextPaint.measureText("10.00");
+//        int secondStep = (int)(textWidth * seconds *2) / width;
+//        secondStep = Math.max(secondStep, 1);
+//        for (float i = 0; i <= seconds; i += secondStep) {
+//            canvas.drawText(String.format("%.2f", i), i * xStep, textHeight, mTextPaint);
+//        }
+//    }
 }

@@ -139,9 +139,9 @@ public class RecordingSettingActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch (RGSampleRate.getCheckedRadioButtonId()){
-                    case ir.khorramnejad.soundrecorderpro.R.id.veryLowQFile:
-                        G.inSamplerate = 8000;
-                        break;
+//                    case ir.khorramnejad.soundrecorderpro.R.id.veryLowQFile:
+//                        G.inSamplerate = 8000;
+//                        break;
                     case ir.khorramnejad.soundrecorderpro.R.id.lowQFile:
                         G.inSamplerate = 22050;
                         break;
@@ -158,9 +158,9 @@ public class RecordingSettingActivity extends AppCompatActivity {
         });
 
         switch (G.inSamplerate){
-            case 8000:
-                RGSampleRate.check(ir.khorramnejad.soundrecorderpro.R.id.veryLowQFile);
-                break;
+//            case 8000:
+//                RGSampleRate.check(ir.khorramnejad.soundrecorderpro.R.id.veryLowQFile);
+//                break;
             case 22050:
                 RGSampleRate.check(ir.khorramnejad.soundrecorderpro.R.id.lowQFile);
                 break;

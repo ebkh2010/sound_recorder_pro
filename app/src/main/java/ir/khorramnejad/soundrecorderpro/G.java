@@ -30,7 +30,7 @@ public class G extends Application {
     public static String REC_DIR = Environment.getExternalStorageDirectory() + "/SoundRecorderPro";
     public static String FILE_NAME = "Audio";
     public static String filePath = REC_DIR + "/" + FILE_NAME +".mp3" ;
-    public static final int buferchanger = 2*5;
+//    public static final int buferchanger = 2*5;
 
     @Override
     public void onCreate() {
