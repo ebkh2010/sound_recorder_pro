@@ -27,9 +27,11 @@ public class G extends Application {
                             inAlbum="",
                             inTitle="Recorded by Sound Recorder Pro",
                             inArtist="";
-    public static String REC_DIR = Environment.getExternalStorageDirectory() + "/SoundRecorderPro";
+    public static String dirName ="SoundRecorderPro";
+    public static String REC_DIR = Environment.getExternalStorageDirectory() + "/" +dirName;
     public static String FILE_NAME = "Audio";
     public static String filePath = REC_DIR + "/" + FILE_NAME +".mp3" ;
+
 //    public static final int buferchanger = 2*5;
 
     @Override

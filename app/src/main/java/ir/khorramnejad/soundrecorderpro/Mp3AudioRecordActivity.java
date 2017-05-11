@@ -27,14 +27,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.newventuresoftware.waveform.WaveformView;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import ir.khorramnejad.androidlame.AndroidLame;
+import ir.khorramnejad.waveform.WaveformView;
+
+import static ir.khorramnejad.soundrecorderpro.G.dirName;
 
 
 public class Mp3AudioRecordActivity extends AppCompatActivity {
@@ -326,7 +327,7 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
 
     public void  updateNote()
     {
-        File_name.setText("../SoundRecorderPro/"+name +".mp3");
+        File_name.setText("../"+dirName+"/"+name +".mp3");
 //        Samplerate.setText("Sample Rate: "+String.valueOf(inSamplerate));
 //        Mp3_Bitrate.setText("MP3 CBR Bitrate: " + String.valueOf(inMp3Bitrate));
 //        BitDepth.setText("Bit Depth: "+ String.valueOf(inBitDept)+" Bit");

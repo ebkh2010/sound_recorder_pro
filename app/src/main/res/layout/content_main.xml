@@ -13,7 +13,7 @@
     tools:context="ir.khorramnejad.soundrecorderpro.Mp3AudioRecordActivity"
     tools:showIn="@layout/activity_audio_record">
 
-    <com.newventuresoftware.waveform.WaveformView
+    <ir.khorramnejad.waveform.WaveformView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -21,7 +21,7 @@
         android:background="#05000000"
         android:id="@+id/waveformView" />
 
-    <!--<com.newventuresoftware.waveform.WaveformView-->
+    <!--<WaveformView-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="0dp"-->
         <!--android:layout_weight="1"-->

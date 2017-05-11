@@ -16,6 +16,7 @@ package ir.khorramnejad.soundrecorderpro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -24,29 +25,39 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
+import java.io.File;
+
+import static ir.khorramnejad.soundrecorderpro.G.REC_DIR;
+import static ir.khorramnejad.soundrecorderpro.G.dirName;
+
 public class RecordingSettingActivity extends AppCompatActivity {
 
     RadioGroup RGSampleRate,RGChanels,RGMp3Bitrate,RGCodingQuality,RGBitDepth;
-    EditText ETFileNAme,ETComment,ETAlbum,ETArtist,ETTitle;
+    EditText ETFileNAme,ETComment,ETAlbum,ETArtist,ETTitle,ETDir;
 
     public static String test="";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(ir.khorramnejad.soundrecorderpro.R.layout.activity_setting);
 
-        RGSampleRate    = (RadioGroup) findViewById(ir.khorramnejad.soundrecorderpro.R.id.fqs_radiogroup);
-        RGChanels       = (RadioGroup) findViewById(ir.khorramnejad.soundrecorderpro.R.id.fch_radiogroup);
-        RGMp3Bitrate    = (RadioGroup) findViewById(ir.khorramnejad.soundrecorderpro.R.id.fcodB_rg);
-        RGCodingQuality = (RadioGroup) findViewById(ir.khorramnejad.soundrecorderpro.R.id.fcodQ_rg);
+        RGSampleRate    = (RadioGroup) findViewById(R.id.fqs_radiogroup);
+        RGChanels       = (RadioGroup) findViewById(R.id.fch_radiogroup);
+        RGMp3Bitrate    = (RadioGroup) findViewById(R.id.fcodB_rg);
+        RGCodingQuality = (RadioGroup) findViewById(R.id.fcodQ_rg);
 //        RGBitDepth      = (RadioGroup) findViewById(ir.khorramnejad.soundrecorderpro.R.id.fbd_rg);
 
-        ETFileNAme      = (EditText) findViewById(ir.khorramnejad.soundrecorderpro.R.id.set_name);
+        ETFileNAme      = (EditText) findViewById(R.id.set_name);
+        ETDir           = (EditText) findViewById(R.id.set_dir);
 //        ETComment       = (EditText) findViewById(R.id.set_comment);
 //        ETAlbum         = (EditText) findViewById(R.id.set_album);
 //        ETArtist        = (EditText) findViewById(R.id.set_artist);
 //        ETTitle         = (EditText) findViewById(R.id.set_title);
+
+        ETFileNAme.setHint(G.FILE_NAME);
+        ETDir.setHint(G.dirName);
 
         ETFileNAme.addTextChangedListener(new TextWatcher() {
             @Override
@@ -63,6 +74,27 @@ public class RecordingSettingActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
                 G.FILE_NAME = ETFileNAme.getText().toString();
+            }
+        });
+
+        ETDir.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                dirName = ETDir.getText().toString();
+                REC_DIR = Environment.getExternalStorageDirectory() + "/"+dirName;
+
+
             }
         });
 
@@ -312,6 +344,8 @@ public class RecordingSettingActivity extends AppCompatActivity {
         Intent MainActivityIntent = new Intent(RecordingSettingActivity.this, Mp3AudioRecordActivity.class);
         startActivity(MainActivityIntent);
         super.onBackPressed();
+        new File(REC_DIR).mkdir();
+        G.filePath = REC_DIR + "/" + G.FILE_NAME +".mp3" ;
     }
 }
 

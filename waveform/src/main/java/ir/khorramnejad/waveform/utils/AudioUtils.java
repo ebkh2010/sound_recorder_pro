@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.newventuresoftware.waveform.utils;
+package ir.khorramnejad.waveform.utils;
 
 public final class AudioUtils {
     public static int calculateAudioLength(int samplesCount, int sampleRate, int channelCount) {

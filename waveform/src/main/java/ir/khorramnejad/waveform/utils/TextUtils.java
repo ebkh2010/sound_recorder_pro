@@ -1,4 +1,4 @@
-package com.newventuresoftware.waveform.utils;
+package ir.khorramnejad.waveform.utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;

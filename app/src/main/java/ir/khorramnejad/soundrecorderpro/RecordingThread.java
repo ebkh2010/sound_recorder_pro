@@ -26,6 +26,7 @@ import java.io.IOException;
 
 import ir.khorramnejad.androidlame.AndroidLame;
 import ir.khorramnejad.androidlame.LameBuilder;
+import ir.khorramnejad.waveform.WaveformView;
 
 import static ir.khorramnejad.androidlame.LameBuilder.VbrMode.VBR_OFF;
 
@@ -96,7 +97,7 @@ public class RecordingThread {
 //        short[] audioBuffer = new short[bufferSize*buferchanger];
 //        short[] audioBuffer1 = new short[bufferSize/2];
 
-        short[] audioBuffer = new short[G.minBuffer*com.newventuresoftware.waveform.WaveformView.buferchanger];
+        short[] audioBuffer = new short[G.minBuffer* WaveformView.buferchanger];
         short[] audioBuffer1 = new short[G.minBuffer/2];
 
         // 'mp3buf' should be at least 7200 bytes long
@@ -167,10 +168,10 @@ public class RecordingThread {
 
             int j=0;
             int k=0;
-            for (int i=0;i<G.minBuffer*com.newventuresoftware.waveform.WaveformView.buferchanger;i++)
+            for (int i = 0; i<G.minBuffer* WaveformView.buferchanger; i++)
             {
                k++;
-                if (k==com.newventuresoftware.waveform.WaveformView.buferchanger*2)
+                if (k== WaveformView.buferchanger*2)
                 {
                     audioBuffer1[j]=audioBuffer[i];
                     j++;

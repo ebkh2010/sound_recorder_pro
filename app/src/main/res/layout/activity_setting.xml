@@ -60,6 +60,30 @@
                     android:textSize="@dimen/subtitr_text_size" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/fd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/file_dir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="File directory:"
+                    android:textSize="@dimen/titr_text_size"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/set_dir"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/subtitr_text_size" />
+            </LinearLayout>
+
             <!--<LinearLayout-->
             <!--android:id="@+id/fc"-->
             <!--android:layout_width="match_parent"-->

@@ -1,4 +1,4 @@
-package com.newventuresoftware.waveform;
+package ir.khorramnejad.waveform;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,8 +12,8 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.newventuresoftware.waveform.utils.AudioUtils;
-import com.newventuresoftware.waveform.utils.TextUtils;
+import ir.khorramnejad.waveform.utils.AudioUtils;
+import ir.khorramnejad.waveform.utils.TextUtils;
 
 import java.util.LinkedList;
 
