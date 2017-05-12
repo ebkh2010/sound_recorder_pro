@@ -12,10 +12,10 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import java.util.LinkedList;
+
 import ir.khorramnejad.waveform.utils.AudioUtils;
 import ir.khorramnejad.waveform.utils.TextUtils;
-
-import java.util.LinkedList;
 
 /**
  * TODO: document your custom view class.
@@ -25,7 +25,7 @@ public class WaveformView extends View {
     public static final int MODE_PLAYBACK = 2;
     public static final int buferchanger = 2*5;
     public static int xScale=1;
-    public static int yScale=2;
+    public static int yScale=4;
 
     private static final int HISTORY_SIZE = 10;
 
@@ -109,10 +109,10 @@ public class WaveformView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        width = getMeasuredWidth()*buferchanger*xScale;
-        height = getMeasuredHeight()*yScale;
+        width = getMeasuredWidth()*buferchanger;
+        height = getMeasuredHeight();
         xStep = width / (mAudioLength * 1.0f);
-        centerY = height / 2f;
+        centerY = height / 1f;
         drawRect = new Rect(0, 0, width, height);
 
         if (mHistoricalData != null) {
@@ -248,7 +248,7 @@ public class WaveformView extends View {
         for (int x = 0; x < width; x++) {
             int index = (int) (((x * 1.0f) / width) * buffer.length);
             short sample = buffer[index];
-            float y = centerY - ((sample / max) * centerY);
+            float y = centerY - ((sample*yScale / max) * centerY);
 
             if (lastX != -1) {
                 waveformPoints[pointIndex++] = lastX;
