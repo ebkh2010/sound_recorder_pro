@@ -130,13 +130,13 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <!--<RadioButton-->
-                        <!--android:id="@+id/veryLowQFile"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:text="8000"-->
-                        <!--android:textSize="@dimen/subtitr_text_size" />-->
+                    <RadioButton
+                        android:id="@+id/veryLowQFile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="16000"
+                        android:textSize="@dimen/subtitr_text_size" />
 
                     <RadioButton
                         android:id="@+id/lowQFile"

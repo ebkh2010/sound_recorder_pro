@@ -61,8 +61,10 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
 
 //    LogFragment logFragment;
     TextView statusText, dis_hr , dis_min ,dis_sec , dis_dsec ;
-    TextView File_name,Samplerate,Chanels,BitDepth,
-            Mp3_Bitrate,Codec_Quality,LPF,HPF,Comment;
+    TextView File_name,
+            Samplerate,Chanels,BitDepth,
+            Mp3_Bitrate,Codec_Quality,LPF,HPF,Comment
+            ;
     private WaveformView mRealtimeWaveformView;
     private RecordingThread mRecordingThread;
     private static final int REQUEST_RECORD_AUDIO = 13;
@@ -156,7 +158,8 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
         });
 
     }
-//
+
+    //
 //    private void startRecording() {
 //
 ////        fileNameCreat();
@@ -254,8 +257,7 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
 //        isRecording = false;
 //    }
 
-    private void stopRecording()
-    {
+    private void stopRecording(){
         timerPuse = true;
         if (isRecording) timer.cancel();
         isRecording = false;
@@ -275,9 +277,7 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
 //        });
 //    }
 
-
-    private void startTimer(Timer t )
-    {
+    private void startTimer(Timer t){
 
         t.scheduleAtFixedRate(new TimerTask(){
 
@@ -325,8 +325,7 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
 
     }
 
-    public void  updateNote()
-    {
+    public void  updateNote(){
         File_name.setText("../"+dirName+"/"+name +".mp3");
 //        Samplerate.setText("Sample Rate: "+String.valueOf(inSamplerate));
 //        Mp3_Bitrate.setText("MP3 CBR Bitrate: " + String.valueOf(inMp3Bitrate));
@@ -390,7 +389,6 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
                     android.Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO);
         }
     }
-
 
     public void onStop(){
         super.onStop();
