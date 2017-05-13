@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  */
 
-package ir.khorramnejad.soundrecorderpro;
+package ir.khorramnejad.advancesoundrecorder;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -35,7 +35,7 @@ import java.util.TimerTask;
 import ir.khorramnejad.androidlame.AndroidLame;
 import ir.khorramnejad.waveform.WaveformView;
 
-import static ir.khorramnejad.soundrecorderpro.G.dirName;
+import static ir.khorramnejad.advancesoundrecorder.G.dirName;
 
 
 public class Mp3AudioRecordActivity extends AppCompatActivity {
@@ -72,20 +72,20 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(ir.khorramnejad.soundrecorderpro.R.layout.activity_audio_record);
+        setContentView(ir.khorramnejad.advancesoundrecorder.R.layout.activity_audio_record);
 
 
-        btnRec          = (ImageView) findViewById(ir.khorramnejad.soundrecorderpro.R.id.btn_rec);
-        btnSetting      = (ImageView) findViewById(ir.khorramnejad.soundrecorderpro.R.id.btn_setting);
+        btnRec          = (ImageView) findViewById(ir.khorramnejad.advancesoundrecorder.R.id.btn_rec);
+        btnSetting      = (ImageView) findViewById(ir.khorramnejad.advancesoundrecorder.R.id.btn_setting);
 
 //        statusText      = (TextView) findViewById(R.id.statusText);
 
-        dis_hr          = (TextView) findViewById(ir.khorramnejad.soundrecorderpro.R.id.hr);
-        dis_min         = (TextView) findViewById(ir.khorramnejad.soundrecorderpro.R.id.min);
-        dis_sec         = (TextView) findViewById(ir.khorramnejad.soundrecorderpro.R.id.sec);
-        dis_dsec        = (TextView) findViewById(ir.khorramnejad.soundrecorderpro.R.id.dsec);
+        dis_hr          = (TextView) findViewById(ir.khorramnejad.advancesoundrecorder.R.id.hr);
+        dis_min         = (TextView) findViewById(ir.khorramnejad.advancesoundrecorder.R.id.min);
+        dis_sec         = (TextView) findViewById(ir.khorramnejad.advancesoundrecorder.R.id.sec);
+        dis_dsec        = (TextView) findViewById(ir.khorramnejad.advancesoundrecorder.R.id.dsec);
 
-        File_name       = (TextView) findViewById(ir.khorramnejad.soundrecorderpro.R.id.record_info);
+        File_name       = (TextView) findViewById(ir.khorramnejad.advancesoundrecorder.R.id.record_info);
 //        Samplerate      = (TextView) findViewById(R.id.samplerate);
 //        Chanels         = (TextView) findViewById(R.id.chanels);
 //        Mp3_Bitrate     = (TextView) findViewById(R.id.mp3Bitrate);

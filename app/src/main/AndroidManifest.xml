@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ir.khorramnejad.soundrecorderpro"
-    android:versionCode="2"
-    android:versionName="1.0.1">
+    package="ir.khorramnejad.advancesoundrecorder"
+    android:versionCode="3"
+    android:versionName="1">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -12,16 +12,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="ir.khorramnejad.soundrecorderpro.G">
+        android:name="ir.khorramnejad.advancesoundrecorder.G">
 
 
 
         <activity
-            android:name="ir.khorramnejad.soundrecorderpro.RecordingSettingActivity"
+            android:name="ir.khorramnejad.advancesoundrecorder.RecordingSettingActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="ir.khorramnejad.soundrecorderpro.Mp3AudioRecordActivity"
+            android:name="ir.khorramnejad.advancesoundrecorder.Mp3AudioRecordActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

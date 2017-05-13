@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  */
 
-package ir.khorramnejad.soundrecorderpro;
+package ir.khorramnejad.advancesoundrecorder;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,8 +27,8 @@ import android.widget.RadioGroup;
 
 import java.io.File;
 
-import static ir.khorramnejad.soundrecorderpro.G.REC_DIR;
-import static ir.khorramnejad.soundrecorderpro.G.dirName;
+import static ir.khorramnejad.advancesoundrecorder.G.REC_DIR;
+import static ir.khorramnejad.advancesoundrecorder.G.dirName;
 
 public class RecordingSettingActivity extends AppCompatActivity {
 
@@ -41,7 +41,7 @@ public class RecordingSettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(ir.khorramnejad.soundrecorderpro.R.layout.activity_setting);
+        setContentView(ir.khorramnejad.advancesoundrecorder.R.layout.activity_setting);
 
         RGSampleRate    = (RadioGroup) findViewById(R.id.fqs_radiogroup);
         RGChanels       = (RadioGroup) findViewById(R.id.fch_radiogroup);
@@ -171,16 +171,16 @@ public class RecordingSettingActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch (RGSampleRate.getCheckedRadioButtonId()){
-                    case ir.khorramnejad.soundrecorderpro.R.id.veryLowQFile:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.veryLowQFile:
                         G.inSamplerate = 16000;
                         break;
-                    case ir.khorramnejad.soundrecorderpro.R.id.lowQFile:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.lowQFile:
                         G.inSamplerate = 22050;
                         break;
-                    case ir.khorramnejad.soundrecorderpro.R.id.normalQFile:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.normalQFile:
                         G.inSamplerate = 44100;
                         break;
-                    case ir.khorramnejad.soundrecorderpro.R.id.HighQFile:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.HighQFile:
                         G.inSamplerate = 48000;
                         break;
                     default:
@@ -191,16 +191,16 @@ public class RecordingSettingActivity extends AppCompatActivity {
 
         switch (G.inSamplerate){
             case 16000:
-                RGSampleRate.check(ir.khorramnejad.soundrecorderpro.R.id.veryLowQFile);
+                RGSampleRate.check(ir.khorramnejad.advancesoundrecorder.R.id.veryLowQFile);
                 break;
             case 22050:
-                RGSampleRate.check(ir.khorramnejad.soundrecorderpro.R.id.lowQFile);
+                RGSampleRate.check(ir.khorramnejad.advancesoundrecorder.R.id.lowQFile);
                 break;
             case 44100:
-                RGSampleRate.check(ir.khorramnejad.soundrecorderpro.R.id.normalQFile);
+                RGSampleRate.check(ir.khorramnejad.advancesoundrecorder.R.id.normalQFile);
                 break;
             case 48000:
-                RGSampleRate.check(ir.khorramnejad.soundrecorderpro.R.id.HighQFile);
+                RGSampleRate.check(ir.khorramnejad.advancesoundrecorder.R.id.HighQFile);
                 break;
             default:
                 break;
@@ -237,10 +237,10 @@ public class RecordingSettingActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch (RGChanels.getCheckedRadioButtonId()){
-                    case ir.khorramnejad.soundrecorderpro.R.id.mono:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.mono:
                         G.inChanels = 1;
                         break;
-                    case ir.khorramnejad.soundrecorderpro.R.id.stereo:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.stereo:
                         G.inChanels = 2;
                         break;
                     default:
@@ -251,10 +251,10 @@ public class RecordingSettingActivity extends AppCompatActivity {
 
         switch (G.inChanels){
             case 1:
-                RGChanels.check(ir.khorramnejad.soundrecorderpro.R.id.mono);
+                RGChanels.check(ir.khorramnejad.advancesoundrecorder.R.id.mono);
                 break;
             case 2:
-                RGChanels.check(ir.khorramnejad.soundrecorderpro.R.id.stereo);
+                RGChanels.check(ir.khorramnejad.advancesoundrecorder.R.id.stereo);
                 break;
         }
 
@@ -262,16 +262,16 @@ public class RecordingSettingActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch (RGMp3Bitrate.getCheckedRadioButtonId()){
-                    case ir.khorramnejad.soundrecorderpro.R.id.mp3B32:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.mp3B32:
                         G.inMp3Bitrate = 32;
                         break;
-                    case ir.khorramnejad.soundrecorderpro.R.id.mp3B64:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.mp3B64:
                         G.inMp3Bitrate = 64;
                         break;
-                    case ir.khorramnejad.soundrecorderpro.R.id.Mp3B128:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.Mp3B128:
                         G.inMp3Bitrate = 128;
                         break;
-                    case ir.khorramnejad.soundrecorderpro.R.id.mp3B256:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.mp3B256:
                         G.inMp3Bitrate = 256;
                         break;
                     default:
@@ -282,16 +282,16 @@ public class RecordingSettingActivity extends AppCompatActivity {
 
         switch (G.inMp3Bitrate){
             case 32:
-                RGMp3Bitrate.check(ir.khorramnejad.soundrecorderpro.R.id.mp3B32);
+                RGMp3Bitrate.check(ir.khorramnejad.advancesoundrecorder.R.id.mp3B32);
                 break;
             case 64:
-                RGMp3Bitrate.check(ir.khorramnejad.soundrecorderpro.R.id.mp3B64);
+                RGMp3Bitrate.check(ir.khorramnejad.advancesoundrecorder.R.id.mp3B64);
                 break;
             case 128:
-                RGMp3Bitrate.check(ir.khorramnejad.soundrecorderpro.R.id.Mp3B128);
+                RGMp3Bitrate.check(ir.khorramnejad.advancesoundrecorder.R.id.Mp3B128);
                 break;
             case 256:
-                RGMp3Bitrate.check(ir.khorramnejad.soundrecorderpro.R.id.mp3B256);
+                RGMp3Bitrate.check(ir.khorramnejad.advancesoundrecorder.R.id.mp3B256);
                 break;
             default:
                 break;
@@ -301,16 +301,16 @@ public class RecordingSettingActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch (RGCodingQuality.getCheckedRadioButtonId()){
-                    case ir.khorramnejad.soundrecorderpro.R.id.mp3Qlow:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.mp3Qlow:
                         G.inQuality = 9;
                         break;
-                    case ir.khorramnejad.soundrecorderpro.R.id.mp3Qnormal:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.mp3Qnormal:
                         G.inQuality = 5;
                         break;
-                    case ir.khorramnejad.soundrecorderpro.R.id.Mp3Qhigh:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.Mp3Qhigh:
                         G.inQuality = 2;
                         break;
-                    case ir.khorramnejad.soundrecorderpro.R.id.mp3Qbest:
+                    case ir.khorramnejad.advancesoundrecorder.R.id.mp3Qbest:
                         G.inQuality = 0;
                         break;
                     default:
@@ -321,16 +321,16 @@ public class RecordingSettingActivity extends AppCompatActivity {
 
         switch (G.inQuality){
             case 9:
-                RGCodingQuality.check(ir.khorramnejad.soundrecorderpro.R.id.mp3Qlow);
+                RGCodingQuality.check(ir.khorramnejad.advancesoundrecorder.R.id.mp3Qlow);
                 break;
             case 5:
-                RGCodingQuality.check(ir.khorramnejad.soundrecorderpro.R.id.mp3Qnormal);
+                RGCodingQuality.check(ir.khorramnejad.advancesoundrecorder.R.id.mp3Qnormal);
                 break;
             case 2:
-                RGCodingQuality.check(ir.khorramnejad.soundrecorderpro.R.id.Mp3Qhigh);
+                RGCodingQuality.check(ir.khorramnejad.advancesoundrecorder.R.id.Mp3Qhigh);
                 break;
             case 0:
-                RGCodingQuality.check(ir.khorramnejad.soundrecorderpro.R.id.mp3Qbest);
+                RGCodingQuality.check(ir.khorramnejad.advancesoundrecorder.R.id.mp3Qbest);
                 break;
         }
 

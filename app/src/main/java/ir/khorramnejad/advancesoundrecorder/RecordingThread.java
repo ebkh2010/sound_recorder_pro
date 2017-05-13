@@ -12,7 +12,7 @@
  * the License.
  */
 
-package ir.khorramnejad.soundrecorderpro;
+package ir.khorramnejad.advancesoundrecorder;
 
 import android.media.AudioFormat;
 import android.media.AudioRecord;

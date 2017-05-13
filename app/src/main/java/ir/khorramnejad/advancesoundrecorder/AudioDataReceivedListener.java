@@ -12,7 +12,7 @@
  * the License.
  */
 
-package ir.khorramnejad.soundrecorderpro;
+package ir.khorramnejad.advancesoundrecorder;
 
 public interface AudioDataReceivedListener {
     void onAudioDataReceived(short[] data);
