@@ -14,14 +14,18 @@
 
 package ir.khorramnejad.advancesoundrecorder;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioRecord;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -35,6 +39,7 @@ import java.util.TimerTask;
 import ir.khorramnejad.androidlame.AndroidLame;
 import ir.khorramnejad.waveform.WaveformView;
 
+import static ir.khorramnejad.advancesoundrecorder.G.REC_DIR;
 import static ir.khorramnejad.advancesoundrecorder.G.dirName;
 
 
@@ -74,6 +79,12 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(ir.khorramnejad.advancesoundrecorder.R.layout.activity_audio_record);
 
+        //GET PERMISSIONS IN ANDROID 6+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            RequestPermissions();
+        }
+
+        new File(REC_DIR).mkdir();
 
         btnRec          = (ImageView) findViewById(ir.khorramnejad.advancesoundrecorder.R.id.btn_rec);
         btnSetting      = (ImageView) findViewById(ir.khorramnejad.advancesoundrecorder.R.id.btn_setting);
@@ -119,6 +130,8 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (!isRecording) {
+                    if(!(new File(REC_DIR).exists()))
+                        new File(REC_DIR).mkdir();
                     fileNameCreat();
                     updateNote();
                     new Thread() {
@@ -353,14 +366,14 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
 
     private void fileNameCreat(){
 
-        File audio = new File(G.REC_DIR + "/" + G.FILE_NAME +".mp3");
+        File audio = new File(REC_DIR + "/" + G.FILE_NAME +".mp3");
         name= G.FILE_NAME;
         while (audio.exists()) {
             fileCunter++;
             name = G.FILE_NAME + "(" + fileCunter + ")";
-            audio = new File(G.REC_DIR + "/" + name +".mp3");
+            audio = new File(REC_DIR + "/" + name +".mp3");
         }
-            G.filePath = G.REC_DIR + "/" + name + ".mp3";
+            G.filePath = REC_DIR + "/" + name + ".mp3";
     }
 
     private void startAudioRecordingSafe() {
@@ -404,6 +417,84 @@ public class Mp3AudioRecordActivity extends AppCompatActivity {
     public void onDestroy(){
         super.onDestroy();
         stopRecording();
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+
+            case G.writeStoragePermission: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+                    reRequestPermissions();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+    private void RequestPermissions(){
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // No explanation needed, we can request the permission.
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    G.writeStoragePermission);
+        }
+
+//        if (ContextCompat.checkSelfPermission(this,
+//                Manifest.permission.RECORD_AUDIO)
+//                != PackageManager.PERMISSION_GRANTED) {
+//
+//            // No explanation needed, we can request the permission.
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.RECORD_AUDIO},
+//                    G.recordPermission);
+//        }
+    }
+
+    private void reRequestPermissions(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("");
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("این اجازه برای ذخیره کردن اطلاعات در حافظه ی گوشی میباشد");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("تایید", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                ActivityCompat.requestPermissions(Mp3AudioRecordActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        G.writeStoragePermission);
+            }
+        });
+
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("بستن برنامه", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                finish();
+                dialog.cancel();
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
     }
 
 }

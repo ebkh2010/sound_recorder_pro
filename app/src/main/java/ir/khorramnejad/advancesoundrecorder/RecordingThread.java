@@ -185,7 +185,7 @@ public class RecordingThread {
 
         int outputMp3buf = androidLame.flush(mp3buffer);
 
-        if (outputMp3buf > 0) {
+        if (outputMp3buf > 0 ) {
             try {
                 outputStream.write(mp3buffer, 0, outputMp3buf);
                 outputStream.close();
@@ -194,12 +194,13 @@ public class RecordingThread {
             }
         }
 
+        if (record.getState()!=0)
         record.stop();
         record.release();
         androidLame.close();
 
         mShouldContinue=false;
 
-        Log.v(LOG_TAG, String.format("Recording stopped. Samples read: %d", shortsRead));
+
     }
 }

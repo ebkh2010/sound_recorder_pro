@@ -31,7 +31,8 @@ public class G extends Application {
     public static String    REC_DIR                     = Environment.getExternalStorageDirectory() + "/" +dirName;
     public static String    FILE_NAME                   = "Audio";
     public static String    filePath                    = REC_DIR + "/" + FILE_NAME +".mp3" ;
-
+    public static final int writeStoragePermission      = 1 ,
+                            recordPermission            = 1;
 //    public static final int buferchanger = 2*5;
 
     @Override
